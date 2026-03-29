@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  BINARY_NAME: clicker
+  GOOS: '{{.GOOS | default "windows"}}'
+  GOARCH: '{{.GOARCH | default "amd64"}}'
+  CGO_ENABLED: 1
+  GREETING: Hello, world!
+
+tasks:
+  default:
+    desc: Print a greeting message
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+  clean:
+    desc: "Очистить собранные бинарники"
+    cmds:
+      - go run ./build-src clean
+  build:
+    desc: "Собрать Go‑проект"
+    cmds:
+      - |
+        go run ./build-src build
+    env:
+      GOOS: '{{.GOOS}}'
+      GOARCH: '{{.GOARCH}}'
+      CGO_ENABLED: '{{.CGO_ENABLED}}'
+      BINARY_NAME: '{{.BINARY_NAME}}'

@@ -1,0 +1,9 @@
+profile: exampleProfile
+
+profiles:
+  exampleProfile:
+    clicks:
+      - left
+      - right
+    keys:
+      - space
